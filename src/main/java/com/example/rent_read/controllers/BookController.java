@@ -41,10 +41,10 @@ public class BookController {
         return bookService.saveEntry(book);
     }
 
-    @PutMapping("/{bookId}")
-    public ResponseEntity<?> updateEntry(@PathVariable Long bookId, @RequestBody Book updatedBook) {
-        return bookService.updateEntry(bookId, updatedBook);
-    }
+//    @PutMapping("/{bookId}")
+//    public ResponseEntity<?> updateEntry(@PathVariable Long bookId, @RequestBody Book updatedBook) {
+//        return bookService.updateEntry(bookId, updatedBook);
+//    }
 
     @PostMapping("/{bookId}/rent")
     public ResponseEntity<?> rentABook(@PathVariable Long bookId, @RequestParam String userEmail){
@@ -54,6 +54,11 @@ public class BookController {
     @PostMapping("/{bookId}/return")
     public ResponseEntity<?> returnABook(@PathVariable Long bookId, @RequestParam String userEmail){
         return rentalService.returnBook(bookId, userEmail);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteAllBooks(){
+        return bookService.deleteAll();
     }
 
     @DeleteMapping("/{bookId}")

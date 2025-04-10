@@ -102,4 +102,17 @@ public class RentalService {
     public List<Rental> getAll() {
         return rentalRepository.findAll();
     }
+
+    public ResponseEntity<?> deleteEntry(Long rentalId) {
+        Rental rental = rentalRepository.findById(rentalId).orElse(null);
+        if(rental == null) return new ResponseEntity<>("Rental Not Found!", HttpStatus.NOT_FOUND);
+
+        rentalRepository.deleteById(rentalId);
+        return new ResponseEntity<>("Deleted Successfully!", HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> deleteAll() {
+        rentalRepository.deleteAll();
+        return new ResponseEntity<>("All Rentals Deleted Successfully!", HttpStatus.OK);
+    }
 }

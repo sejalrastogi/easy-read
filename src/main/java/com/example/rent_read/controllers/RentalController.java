@@ -42,4 +42,14 @@ public class RentalController {
 //    public ResponseEntity<?> returnABook(@PathVariable String bookId, @RequestParam String userEmail){
 //        return rentalService.returnBook(bookId, userEmail);
 //    }
+
+    @DeleteMapping("/{rentalId}")
+    public ResponseEntity<?> deleteEntry(@PathVariable Long rentalId){
+        return rentalService.deleteEntry(rentalId);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteAll(){
+        return rentalService.deleteAll();
+    }
 }

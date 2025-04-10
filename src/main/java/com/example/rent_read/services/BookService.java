@@ -54,21 +54,21 @@ public class BookService {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> updateEntry(Long bookId, Book newBook) {
-        Book existingBook = bookRepository.findById(bookId).orElse(null);
-        if(existingBook == null){
-            return new ResponseEntity<>("Book Not Found!", HttpStatus.NOT_FOUND);
-        }
-
-        existingBook.setId(newBook.getId());
-        existingBook.setTitle(newBook.getTitle());
-        existingBook.setAuthor(newBook.getAuthor());
-        existingBook.setAvailable(newBook.isAvailable());
-
-        bookRepository.save(existingBook);
-
-        return new ResponseEntity<>(existingBook, HttpStatus.OK);
-    }
+//    public ResponseEntity<?> updateEntry(Long bookId, Book newBook) {
+//        Book existingBook = bookRepository.findById(bookId).orElse(null);
+//        if(existingBook == null){
+//            return new ResponseEntity<>("Book Not Found!", HttpStatus.NOT_FOUND);
+//        }
+//
+//        existingBook.setId(newBook.getId());
+//        existingBook.setTitle(newBook.getTitle());
+//        existingBook.setAuthor(newBook.getAuthor());
+//        existingBook.setAvailable(newBook.isAvailable());
+//
+//        bookRepository.save(existingBook);
+//
+//        return new ResponseEntity<>(existingBook, HttpStatus.OK);
+//    }
 
     public ResponseEntity<?> getAllAvailable() {
         List<Book> allBooks = bookRepository.findAll();
@@ -77,5 +77,10 @@ public class BookService {
             if(book.isAvailable()) allAvailableBooks.add(book);
         }
         return new ResponseEntity<>(allAvailableBooks, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> deleteAll() {
+        bookRepository.deleteAll();
+        return new ResponseEntity<>("All Books Deleted Successfully!", HttpStatus.OK);
     }
 }
